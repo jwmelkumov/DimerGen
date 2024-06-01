@@ -1,9 +1,13 @@
-# DimerGen
+# DimerGen 
 
-DimerGen is a molecular utility program that can be used to generate dimers in a 6D space. The dimers are
-described by the center-of-mass (COM) distance between their constituent monomers and 5 Euler angles 
-(in the ZYZ convention). The user must provide the geometry of each monomer (in XYZ file format), along 
-with the 6 coordinates: $( R_{\rm COM}, \beta_A, \gamma_A,  \alpha_B, \beta_B, \gamma_B )$. Note: $\alpha_A$ is hardcoded and set to 0, so it is not a coordinate.
+<p align="center">
+<img src="https://raw.githubusercontent.com/jwmelkumov/DimerGen/main/Documentation/DimerGen.png" width="400">
+</p>
+
+DimerGen is a molecular utility program that generates dimers in a 6D space. The dimers are
+described by the radial distance between the center-of-masses (COM) of their constituent monomers and 5 Euler angles. 
+The user must provide the geometry of each monomer (in XYZ file format), along 
+with the 6 coordinates: $( R_{\rm COM}, \beta_A, \gamma_A,  \alpha_B, \beta_B, \gamma_B )$. Note: $\alpha_A$ is hardcoded and set to 0.
 
 There are two versions of the program, one written in C++ and another written in Python. The former can be
 found in the [cppDimerGen](https://github.com/jwmelkumov/DimerGen/tree/main/cppDimerGen) subdirectory and the latter can be found in the [pyDimerGen](https://github.com/jwmelkumov/DimerGen/tree/main/pyDimerGen) subdirectory.
@@ -17,7 +21,7 @@ found in the [cppDimerGen](https://github.com/jwmelkumov/DimerGen/tree/main/cppD
 ## Euler Angles and Rigid Body Rotations
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/jwmelkumov/DimerGen/main/Documentation/EulerRotations.png" width="500">
+<img src="https://raw.githubusercontent.com/jwmelkumov/DimerGen/main/Documentation/EulerRotations.png" width="400">
 </p>
 
 Given a set of atomic coordinates and masses (automatically extracted via lookup table from the substrings of
@@ -25,17 +29,17 @@ atomic labels in the input XYZ file) for each monomer, the center-of-mass is com
 
 The convention used here is ZYZ, so the rotation matrix is constructed as:
 <p align="center">
-<img src="https://raw.githubusercontent.com/jwmelkumov/DimerGen/main/Documentation/R.png" width="500">
+<img src="https://raw.githubusercontent.com/jwmelkumov/DimerGen/main/Documentation/R.png" width="400">
 </p>
 
 where
 <p align="center">
-<img src="https://raw.githubusercontent.com/jwmelkumov/DimerGen/main/Documentation/Rz.png" width="500">
+<img src="https://raw.githubusercontent.com/jwmelkumov/DimerGen/main/Documentation/Rz.png" width="400">
 </p>
 
 and
 <p align="center">
-<img src="https://raw.githubusercontent.com/jwmelkumov/DimerGen/main/Documentation/Ry.png" width="500">
+<img src="https://raw.githubusercontent.com/jwmelkumov/DimerGen/main/Documentation/Ry.png" width="400">
 </p>
 
 ## Notes
