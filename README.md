@@ -5,7 +5,7 @@
 </p>
 
 DimerGen is a molecular utility program that generates dimers in a 6D space. The dimers are
-described by the radial distance between the center-of-masses (COM) of their constituent monomers and 5 Euler angles. 
+described by the radial distance between the center-of-masses (COMs) of their constituent monomers and 5 Euler angles. 
 The user must provide the geometry of each monomer (in XYZ file format), along 
 with the 6 coordinates: $( R_{\rm COM}, \beta_A, \gamma_A,  \alpha_B, \beta_B, \gamma_B )$. Note: $\alpha_A$ is hardcoded and set to 0.
 
@@ -25,7 +25,7 @@ found in the [cppDimerGen](https://github.com/jwmelkumov/DimerGen/tree/main/cppD
 </p>
 
 Given a set of atomic coordinates and masses (automatically extracted via lookup table from the substrings of
-atomic labels in the input XYZ file) for each monomer, the center-of-mass is computed and the coordinates are shifted such that the COM is at the origin. The inertia tensor is then computed for each monomer and the principal axes are obtained by solving for the eigenvectors of the inertia tensor. After the principal axes are obtained, the coordinates of each monomer are transformed into the principal axes frame. Using the user-specified Euler angles, the rotation matrix is constructed and applied to the coordinates in the principal axes frame. The rotated coordinates are then transformed back to the original frame and the separation vector between the two monomers is used to translate the coordinates by the user-specified separation (in angstroms).
+atomic labels in the input XYZ file) for each monomer, the COM is computed and the coordinates are shifted such that the COM is at the origin. The inertia tensor is then computed for each monomer and the principal axes are obtained by solving for the eigenvectors of the inertia tensor. After the principal axes are obtained, the coordinates of each monomer are transformed into the principal axes frame. Using the user-specified Euler angles, the rotation matrix is constructed and applied to the coordinates in the principal axes frame. The rotated coordinates are then transformed back to the original frame and the separation vector between the two monomers is used to translate the coordinates by the user-specified separation (in angstroms).
 
 The convention used here is ZYZ, so the rotation matrix is constructed as:
 <p align="center">
