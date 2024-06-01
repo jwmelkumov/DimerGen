@@ -54,7 +54,7 @@ and
 ## Usage 
 To compile the C++ program, one can use the following line:
 ```bash
-$ g++ -o DimerGen -I <path_to_eigen3> DimerGen.cpp
+g++ -o DimerGen -I <path_to_eigen3> DimerGen.cpp
 ```
 Once the code has been compiled, one can then run the program with the following line:
 ```bash
