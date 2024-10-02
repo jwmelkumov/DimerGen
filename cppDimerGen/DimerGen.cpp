@@ -236,11 +236,9 @@ int main(int argc, char* argv[]) {
     MatrixXf centered_monA_rotated = monA_rotated_principal * principal_axes_A;
     MatrixXf centered_monB_rotated = monB_rotated_principal * principal_axes_B;
 
-    Vector3f RAB = comB - comA;
-    Vector3f RABuvec = RAB.normalized();
-    Vector3f translation = sep * RABuvec;
+    Vector3f translation_B(0, 0, sep);
 
-    MatrixXf trans_rot_monomer_B = centered_monB_rotated.rowwise() + translation.transpose();
+    MatrixXf trans_rot_monomer_B = centered_monB_rotated.rowwise() + translation_B.transpose();
 
     cout << centered_monA_rotated.rows() + trans_rot_monomer_B.rows() << endl;
     cout << "Dimer_" << sep << "_Å_COM-COM_separation_" << alphaA << "deg_" << betaA << "deg_" << gammaA << "deg_" << alphaB << "deg_" << betaB << "deg_" << gammaB << "deg" << endl;
