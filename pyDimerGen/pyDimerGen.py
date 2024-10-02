@@ -42,6 +42,13 @@ import os
 import sys
 import numpy as np
 
+def getCOM(coords, masses):
+    total_mass = sum(masses)
+    com_x = sum(coords[:, 0] * masses) / total_mass
+    com_y = sum(coords[:, 1] * masses) / total_mass
+    com_z = sum(coords[:, 2] * masses) / total_mass
+    return np.array([com_x, com_y, com_z])
+
 def compute_inertia_tensor(xyz, masses):
     inertia_tensor = np.zeros((3, 3))
     for i in range(len(masses)):
@@ -928,56 +935,8 @@ for i in labelsB:
 xyzmatA = np.array(xyzA)
 xyzmatB = np.array(xyzB)
 
-# x
-xA = 0.0
-tmassA = 0.0
-for i in range(0, len(xyzmatA)):
-    xA += xyzmatA[i,0] * massA[i]
-    tmassA += massA[i]
-comxA = xA / tmassA
-# y
-yA = 0.0
-tmassA = 0.0
-for i in range(0, len(xyzmatA)):
-    yA += xyzmatA[i,1] * massA[i]
-    tmassA += massA[i]
-comyA = yA / tmassA
-
-# z
-zA = 0.0
-tmassA = 0.0
-for i in range(0, len(xyzmatA)):
-    zA += xyzmatA[i,2] * massA[i]
-    tmassA += massA[i]
-comzA = zA / tmassA
-
-comA = np.array([comxA, comyA, comzA])
-
-# Get COM coordinates for monomer B:
-# x
-xB = 0.0
-tmassB = 0.0
-for i in range(0, len(xyzmatB)):
-    xB += xyzmatB[i,0] * massB[i]
-    tmassB += massB[i]
-comxB = xB / tmassB
-# y
-yB = 0.0
-tmassB = 0.0
-for i in range(0, len(xyzmatB)):
-    yB += xyzmatB[i,1] * massB[i]
-    tmassB += massB[i]
-comyB = yB / tmassB
-
-# z
-zB = 0.0
-tmassB = 0.0
-for i in range(0, len(xyzmatB)):
-    zB += xyzmatB[i,2] * massB[i]
-    tmassB += massB[i]
-comzB = zB / tmassB
-
-comB = np.array([comxB, comyB, comzB])
+comA = getCOM(xyzmatA, massA)
+comB = getCOM(xyzmatB, massB)
 
 # translate monomer A to COM:
 centered_monomer_A = xyzmatA - comA
@@ -1027,15 +986,17 @@ centered_monomer_B_rotated_inPA = np.dot(centered_monomer_B_inPA, rotation_matB)
 centered_monB_rotated = np.dot(centered_monomer_B_rotated_inPA, principal_axes_B)
 #$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$
 
-# get vector from COM of monomer A to COM of monomer B
-RAB = comB - comA
-# normalize RAB
-magRAB = np.linalg.norm(RAB)
-RABuvec = RAB / magRAB
+translation_B = sep * np.array([0, 0, 1])
 
 # translate monomer B away from COM of monomer A
-translation = sep * RABuvec
-trans_rot_monomer_B = centered_monB_rotated + translation
+trans_rot_monomer_B = centered_monB_rotated + translation_B
+
+"""
+# Check COM separations:
+print("COM Separation AB:")
+distAB = np.linalg.norm(getCOM(centered_monA_rotated, massA) - getCOM(trans_rot_monomer_B, massB))
+print(f"{distAB:.2f}")
+"""
 
 namesA = np.array(labelsA)
 namesB = np.array(labelsB)
